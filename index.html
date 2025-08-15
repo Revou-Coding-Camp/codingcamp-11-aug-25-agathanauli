@@ -4,44 +4,341 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Agatha Nauli</title>
+    <title>Portfolio Agatha</title>
 
-    <!--CSS EXTERNAL-->
+    <!-- CSS External -->
     <link rel="stylesheet" href="css/style.css">
 
-    <!--Tailwind CSS CDM-->
-    <src="https:cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
 <body>
 
-    <!--Main Header-->
-    <header class="flex-items-center justify-between p-[16px]">
-    <!--Logo Icon-->
-    <div class="bg-blue-500 rounded-full h-[75px]"></div>
+    <!-- Main Header -->
+    <header class="bg-white shadow-sm relative z-50">
+        <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
 
-    <nav>
-        <ul class="flex gap-[8px]">
-            <li><a href="a"
-                    class= "text-gray-700 border py-[4px] px-[8px] rounded-[8px] hover: text-blue-500">Home</a></li>
-            
-        </ul>  
-    </nav>
-       
+            <!-- Logo Icon -->
+            <div class="flex items-center">
+                <div class="bg-gray-500 rounded-full h-[50px] w-[50px] main-logo"></div>
+            </div>
+
+            <!-- Menu Desktop -->
+            <nav class="hidden md:block">
+                <ul class="flex gap-4">
+                    <li><a href="#home-page" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500">Home</a></li>
+                    <li><a href="#profile" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500">Profile</a></li>
+                    <li><a href="#portofolio" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500">Portofolio</a></li>
+                    <li><a href="#message" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500">Message</a></li>
+                </ul>
+            </nav>
+
+            <!-- Hamburger Menu Button + Dropdown Container -->
+            <div id="menu-container" class="md:hidden relative">
+                <button id="menu-btn" class="flex flex-col space-y-1 p-2 hover:bg-pink-200 rounded-md" aria-expanded="false">
+                    <span class="block w-6 h-0.5 bg-pink-800"></span>
+                    <span class="block w-6 h-0.5 bg-pink-800"></span>
+                    <span class="block w-6 h-0.5 bg-pink-800"></span>
+                </button>
+
+            <!-- Menu Mobile -->
+            <nav id="mobile-menu"
+                class="invisible opacity-0 translate-y-2 pointer-events-none absolute right-0 top-full mt-2 w-56
+                    bg-white/50 backdrop-blur-md p-4 text-right shadow-lg rounded-lg transform transition-all duration-300 ease-out">
+                <ul class="flex flex-col space-y-3">
+                    <li><a href="#home-page" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500 inline-block">Home</a></li>
+                    <li><a href="#profile" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500 inline-block">Profile</a></li>
+                    <li><a href="#portofolio" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500 inline-block">Portofolio</a></li>
+                    <li><a href="#message" class="text-gray-700 border py-1 px-3 rounded-md hover:text-pink-500 inline-block">Message</a></li>
+                </ul>
+            </nav>
+            </div>
+        </div>
     </header>
 
-    <!--MAIN-->
-    <main>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const container = document.getElementById('menu-container');
+
+        function openMenu() {
+            menu.classList.remove('invisible','opacity-0','translate-y-2','pointer-events-none');
+            menu.classList.add('opacity-100','translate-y-0');
+            btn.setAttribute('aria-expanded', 'true');
+        }
+        function closeMenu() {
+            menu.classList.remove('opacity-100','translate-y-0');
+            menu.classList.add('opacity-0','translate-y-2','pointer-events-none');
+            setTimeout(() => menu.classList.add('invisible'), 300);
+            btn.setAttribute('aria-expanded', 'false');
+        }
+        function toggleMenu() {
+            const isHidden = menu.classList.contains('invisible') || menu.classList.contains('pointer-events-none');
+            if (isHidden) {
+                menu.classList.remove('invisible');
+                void menu.offsetWidth; // trigger reflow
+                openMenu();
+            } else {
+                closeMenu();
+            }
+        }
+
+        // Klik untuk mobile
+        btn.addEventListener('click', toggleMenu);
+
+        // Hover untuk desktop
+        container.addEventListener('mouseenter', () => {
+            if (window.matchMedia('(min-width: 768px)').matches) {
+                menu.classList.remove('invisible'); void menu.offsetWidth;
+                openMenu();
+            }
+        });
+        container.addEventListener('mouseleave', () => {
+            if (window.matchMedia('(min-width: 768px)').matches) {
+                closeMenu();
+            }
+        });
+
+        // Tutup jika klik di luar
+        document.addEventListener('click', (e) => {
+            if (!container.contains(e.target)) closeMenu();
+        });
+        // Tutup dengan tombol Esc
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMenu();
+        });
+    });
+    </script>
+
+        <!-- Main content -->
+        <main>
+
+        <!-- Home Section -->
+        <section id="home-page" 
+            class="h-screen bg-cover bg-center flex flex-col items-center justify-center text-center space-y-4 px-4"
+            style="background-image: url('../img/IMG_2801.JPG');"
+
+            Sapaan User -->
+            <p id="welcome-text"
+                class="text-2xl sm:text-3xl md:text-5xl font-bold text-white drop-shadow-lg leading-snug opacity-0 translate-y-4 transition-all duration-1000 ease-out">
+                Hai <span id="user-greeting"></span>
+            </p>
+
+            <!-- Judul -->
+            <p id="text"
+                class="text-xl sm:text-3xl md:text-5xl font-bold text-white drop-shadow-lg leading-snug opacity-0 translate-y-4 transition-all duration-1000 ease-out delay-300">
+                Welcome to Agatha Portfolio
+            </p>
+        </section>
+
+        <script>
+            // Ambil nama user dari localStorage
+            let username = localStorage.getItem("username");
+
+            // Jika belum ada, minta nama
+            if (!username) {
+                username = prompt("Masukkan nama Anda:");
+                if (username && username.trim() !== "") {
+                    localStorage.setItem("username", username.trim());
+                } else {
+                    username = "Guest" + ",";
+                }
+            }
+
+            // Tampilkan nama + koma
+            document.getElementById("user-greeting").textContent = username + ",";
+
+            // Animasi masuk teks setelah halaman load
+            window.addEventListener("load", () => {
+                document.getElementById("welcome-text").classList.remove("opacity-0", "translate-y-4");
+                document.getElementById("text").classList.remove("opacity-0", "translate-y-4");
+            });
+        </script>
+
+        <style>
+            /* Pastikan background menutupi seluruh layar */
+            #home-page {
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        </style>
+       
+        <!-- Profile -->
+        <section id="profile" class="bg-dark blue-300 px-4 md:px-16 py-12">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800">Profile</h1>
+        </header>
+
+        <!-- Konten bawah header -->
+        <div class="flex flex-col items-center md:flex-row md:items-center md:justify-center gap-8">
+
+            <!-- Foto Profil -->
+            <div class="flex-shrink-0">
+                <img src="../img/squre.JPG"  
+                    alt="Foto Profil"
+                    class="w-40 h-40 md:w-56 md:h-56 rounded-full shadow-lg object-cover mx-auto md:mx-0">
+            </div>
+
+            <!-- Teks -->
+            <div class="max-w-2xl text-center md:text-justify">
+                <p class="text-gray-600">
+                    I am a final-year Information Systems student with a strong passion for technology, data analysis, and innovative problem-solving. Throughout my academic journey, I have gained solid knowledge in database management, web development, and system analysis, complemented by hands-on experience in several academic and freelance projects.
+                    I am highly motivated, detail-oriented, and adaptable, with excellent communication and teamwork skills developed through collaborative assignments and organizational activities. My goal is to contribute to impactful technology solutions while continuously learning and improving my technical expertise.
+                </p>
+            </div>
+        </div>
+
+        </section>
+    
+       <!-- Portfolio -->
+        <section id="portofolio" class="bg-gray-100 px-4 md:px-16 py-12">
+            <header class="mb-8 text-center">
+                <h1 class="text-4xl font-bold text-gray-800">Portofolio</h1>
+                <p class="text-gray-600 mt-2">A curated selection of my works, showcasing creativity, problem-solving, and technical expertise in Information Systems. Each project reflects my commitment to delivering impactful and functional solutions.</p>
+            </header>
+
+            <!-- Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Card 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="../img/MacBook Pro 14_ - 2.png" alt="Project 1" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h2 class="text-xl font-bold mb-2">Website Jegez</h2>
+                        <p class="text-gray-600 mb-4">Website souvenir etnik khas Sumatra Utara dengan HTML & CSS, serta Bootstrap.</p>
+                        <a href="https://www.figma.com/proto/q65Mqbub8M8qneNOzxoKCp/Untitled?page-id=0%3A1&node-id=112-2&viewport=194%2C271%2C0.04&t=zb5CkkBKR7vtGvSE-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=112%3A2" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="inline-block bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition">
+                            Lihat Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="../img/Naskah.png" alt="Project 2" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h2 class="text-xl font-bold mb-2">Dashboard Srikandi</h2>
+                        <p class="text-gray-600 mb-4">Desain website SRIKANDI (Sistem Informasi Kearsipan Dinamis Terintegrasi) untuk ANRI</p>
+                        <a href="https://www.figma.com/proto/GiOdWXf6GHwoUrTOL5bb2E/dashboard-v2?page-id=0%3A1&node-id=605-183&t=w4v417U6awbjSNPX-1" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="inline-block bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition">
+                            Lihat Project
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="img/Potads.png" alt="Project 3" class="w-full h-48 object-cover">
+                    <div class="p-6 text-left">
+                        <h2 class="text-xl font-bold mb-2">Potads</h2>
+                        <p class="text-gray-600 mb-4">Website company profile dengan sistem pembelanjaan dengan HTML, CSS, Bootstrap</p>
+                        <a href="https://www.figma.com/proto/R07AnyuwiQ9SqfZYxAg7u5/design?page-id=0%3A1&node-id=40-209&p=f&viewport=135%2C556%2C0.02&t=3IMmBfxB4tbiaYab-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=40%3A209" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        class="inline-block bg-pink-500 text-white py-2 px-4 rounded-lg hover:bg-pink-600 transition">
+                            Lihat Project
+                        </a>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        
+        <!-- Message -->
+        <section id="message" class="bg-pink-100 px-4 md:px-16 py-12">
+            <header class="mb-6 text-center">
+                <h1 class="text-2xl md:text-4xl font-bold text-gray-800">Message</h1>
+            </header>
+
+            <!-- Container -->
+            <div id="message-container" class="flex flex-col w-full transition-all duration-300 gap-6">
+                
+                <!-- Form -->
+                <form id="message-form" class="space-y-4 bg-white p-4 rounded-md shadow w-full"
+                    onsubmit="return handleSubmit(event)">
+                    <div>
+                        <label class="block text-gray-700">Nama :</label>
+                        <input type="text" id="name" class="border rounded-md w-full p-2" placeholder="Nama" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700">Tanggal Lahir :</label>
+                        <input type="date" id="birthdate" class="border rounded-md w-full p-2" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700">Jenis Kelamin :</label>
+                        <div class="flex items-center gap-4">
+                            <label class="flex items-center gap-1"><input type="radio" name="gender" value="Laki-Laki" required> Laki-Laki</label>
+                            <label class="flex items-center gap-1"><input type="radio" name="gender" value="Perempuan"> Perempuan</label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-700">Pesan :</label>
+                        <textarea id="message-text" class="border rounded-md w-full p-2" rows="3" placeholder="Pesan" required></textarea>
+                    </div>
+
+                    <button type="submit" 
+                        class="bg-gray-300 hover:bg-pink-400 border rounded-md w-full py-2 font-semibold">Submit</button>
+                </form>
+
+                <!-- Output -->
+                <div id="message-output" class="border p-4 bg-white rounded-md shadow hidden w-full">
+                    <p><strong>Current time :</strong> <span id="current-time"></span></p>
+                    <p><strong>Nama :</strong> <span id="out-name"></span></p>
+                    <p><strong>Tanggal Lahir :</strong> <span id="out-birthdate"></span></p>
+                    <p><strong>Jenis Kelamin :</strong> <span id="out-gender"></span></p>
+                    <p><strong>Pesan :</strong> <span id="out-message"></span></p>
+                </div>
+            </div>
+        </section>
+
+        <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            // Isi output
+            document.getElementById('current-time').textContent = new Date().toString();
+            document.getElementById('out-name').textContent = document.getElementById('name').value;
+            document.getElementById('out-birthdate').textContent = document.getElementById('birthdate').value;
+            const gender = document.querySelector('input[name="gender"]:checked');
+            document.getElementById('out-gender').textContent = gender ? gender.value : "";
+            document.getElementById('out-message').textContent = document.getElementById('message-text').value;
+
+            // Tampilkan output
+            document.getElementById('message-output').classList.remove('hidden');
+
+            // Ubah layout jadi 2 kolom di semua ukuran layar
+            const container = document.getElementById('message-container');
+            container.classList.remove('flex-col');
+            container.classList.add('flex-row');
+            document.getElementById('message-form').classList.add('w-1/2');
+            document.getElementById('message-output').classList.add('w-1/2');
+        }
+        </script>
+
+
 
     </main>
 
-    <!--FOOTER-->
-    <footer>
-
+    <!-- Footer -->
+    <footer class="text-center">
+        <span>&copy; 2025 Portfolio Agatha. All rights reserved.</span>
     </footer>
-    <!--CSS EXTERNAL-->
-    <script src="js/script.js"></script>
 
-    </body>
+    <!-- JS External -->
+    <script src="js/script.js"></script>
+</body>
+
 </html>
